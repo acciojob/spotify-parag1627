@@ -94,16 +94,46 @@ public class SpotifyRepository {
     }
 
     public Song createSong(String title, String albumName, int length) throws Exception{
-        Album album= null;
-        for(Album album1 : albums){
-            if(album1.getTitle() ==albumName){
-                    album = album1;
-                    break;
+//        Album album= null;
+//        for(Album album1 : albums){
+//            if(album1.getTitle() ==albumName){
+//                    album = album1;
+//                    break;
+//            }
+//        }
+//        if(album == null)
+//            throw  new Exception("Album does not Exist");
+//        else{
+//            Song song = new Song();
+//            song.setTitle(title);
+//            song.setLength(length);
+//            song.setLikes(0);
+//
+//            songs.add(song);
+//
+//            if(albumSongMap.containsKey(album)){
+//                List<Song> list = albumSongMap.get(album);
+//                list.add(song);
+//                albumSongMap.put(album,list);
+//            }
+//            else{
+//                List<Song> songList =new ArrayList<>();
+//                songList.add(song);
+//                albumSongMap.put(album,songList);
+//            }
+//            return song;
+//        }
+//    }
+        Album album = null;
+        for(Album album1:albums){
+            if(album1.getTitle()==albumName){
+                album=album1;
+                break;
             }
         }
-        if(album == null)
-            throw  new Exception("Album does not Exist");
-        else{
+        if(album==null)
+            throw new Exception("Album does not exist");
+        else {
             Song song = new Song();
             song.setTitle(title);
             song.setLength(length);
@@ -111,16 +141,20 @@ public class SpotifyRepository {
 
             songs.add(song);
 
+//            List<Song> l = albumSongMap.get(album);
+//            l.add(song);
+//            albumSongMap.put(album,l);
+
             if(albumSongMap.containsKey(album)){
-                List<Song> list = albumSongMap.get(album);
-                list.add(song);
-                albumSongMap.put(album,list);
-            }
-            else{
-                List<Song> songList =new ArrayList<>();
+                List<Song> l = albumSongMap.get(album);
+                l.add(song);
+                albumSongMap.put(album,l);
+            }else{
+                List<Song> songList = new ArrayList<>();
                 songList.add(song);
                 albumSongMap.put(album,songList);
             }
+
             return song;
         }
     }
